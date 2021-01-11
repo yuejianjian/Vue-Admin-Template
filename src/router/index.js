@@ -89,6 +89,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/clipboard',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'ClipboardDemo',
+        component: () => import('@/views/clipboard/index'),
+        meta: { title: '剪切板', icon:'clipboard',affix:false }
+      }
+    ]
+  },
 
   {
     path: '/nested',
