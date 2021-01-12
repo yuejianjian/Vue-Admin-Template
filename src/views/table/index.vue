@@ -85,7 +85,6 @@ export default {
     //获取编辑信息
     getDepartmentDetails(id){
       GetDepartDetails({id:id}).then(res =>{
-        console.log(res);
           const data = res.data;
           this.form.name =data.name;
           this.form.number =data.number;
@@ -93,20 +92,17 @@ export default {
           this.form.content =data.content;
       }).catch(err =>{
           Message.error(err.message);
-          console.log(err);
       })
     },
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(this.form);
             var params={
               name:this.form.name,
               number:this.form.number,
               status:this.form.status=='禁用'?false:true,
               content:this.form.content
             }
-            console.log(params)
             this.loading =true;
             if(this.$route.query.id){
               this.editFun(params,formName);
@@ -114,7 +110,6 @@ export default {
               this.addFun(params,formName);
             }         
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -123,28 +118,22 @@ export default {
     addFun(params,formName){
       DepartmentAddApi(params).then(res =>{
           this.loading =false;
-          console.log(res);
-          Message.success(res.message);
-          console.log(res);         
+          Message.success(res.message);       
           this.$refs[formName].resetFields(); 
           this.$router.push({ path: '/example/tree'});
       }).catch(err =>{   
-           this.loading =false;
-          console.log(err.message);                     
+           this.loading =false;                   
       })
     },
     //编辑
     editFun(params,formName){
       params.id =this.$route.query.id;
-      console.log(params);
       EditDepartDetails(params).then(res =>{
           this.loading =false;
-          console.log(res);
           Message.success(res.message);
           this.$router.push({ path: '/example/tree'});
       }).catch(err =>{
           this.loading =false;  
-          console.log(err);
       })
     }
   }

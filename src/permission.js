@@ -12,35 +12,24 @@ const whiteList = ['/login'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
-  console.log(to);
   NProgress.start()
 
   // set page title
   document.title = getPageTitle(to.meta.title)
-  console.log(document.title);
   // determine whether the user has logged in
   const hasToken = getToken()
 
   if (hasToken) {
-    console.log(to.path);
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
-      console.log('跳转到登录页')
       next({ path: '/' })
       NProgress.done()
     } else {
       const hasGetUserInfo = store.getters.name
-      console.log(hasGetUserInfo);
       if (hasGetUserInfo) {
-        console.log('跳转到登录页11111')
         next()
       } else {
-        console.log('跳转到登录页222222')
         try {
-          // get user info
-
-          //await store.dispatch('user/getInfo')    获取用户信息
-          console.log('跳转到登录页33333')
           next()
         } catch (error) {
           // remove token and go to login page to re-login

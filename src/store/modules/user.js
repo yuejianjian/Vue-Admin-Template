@@ -33,14 +33,10 @@ const actions = {
     const { username, password,code } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password,code:code }).then(response => {
-        console.log(response);
         const mydata= response.data;
-        console.log(mydata);
         commit('SET_TOKEN', mydata.token)
-        console.log("ccddd")
         setToken(mydata.token)
         setUserName(mydata.username)
-        console.log(111111)
         resolve(response)
       }).catch(error => {
         reject(error)
@@ -72,7 +68,6 @@ const actions = {
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log("退出登录");
       removeToken() // must remove  token  first
       resetRouter()
       commit('RESET_STATE')

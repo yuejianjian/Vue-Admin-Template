@@ -9,12 +9,9 @@ const service = axios.create({
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 15000 // request timeout
 })
-console.log(process.env.VUE_APP_BASE_API);
 // request interceptor
 service.interceptors.request.use(
   config => {
-    // do something before request is sent
-    console.log(store.getters.token);
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
@@ -25,8 +22,6 @@ service.interceptors.request.use(
     return config
   },
   error => {
-    // do something with request error
-    console.log(error) // for debug
     return Promise.reject(error)
   }
 )
@@ -45,21 +40,17 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    console.log(response);
     // if the custom code is not 20000, it is judged as an error.
     if(res.resCode !== 0){
-      console.log(11111)
       Message.error(res.message);
       return Promise.reject(data);
     }else{
-      console.log(22222)
       return res;
     }
    
   },
   error => {
-    console.log(333333)
-    console.log('err' + error) // for debug
+
     Message({
       message: error.message,
       type: 'error',

@@ -133,7 +133,6 @@ export default {
     //获取验证码
     getCode(){
       this.countDown(60)
-      console.log(this.loginForm);
       if (!this.loginForm.username) {
           return message.error('用户名不能为空')
       }
@@ -153,16 +152,13 @@ export default {
              type: 'success',
              duration: 5 * 1000
           });
-          console.log(res);
           this.codeButtonStatus.status =false;
           this.countDown(60);
       }).catch(err =>{
-          console.log(err);
       })
     },
 
     countDown(val){
-        console.log(val);
         let time = val;
         if(this.timer){
           clearInterval(this.timer)
@@ -196,21 +192,16 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        console.log(valid);
         if (valid) {
           this.loading = true
-          console.log(this.loginForm);
           this.$store.dispatch('user/login', this.loginForm).then((res) => {
-            console.log(222222)
-            console.log(res)
-            console.log(this.redirect);
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch(() => {
             this.loading = false
           })
         } else {
-          console.log('error submit!!')
+
           return false
         }
       })

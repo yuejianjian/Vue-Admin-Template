@@ -49,7 +49,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'dashboard',
+      name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '控制台', icon: 'dashboard',affix:true }
     }]
@@ -59,18 +59,18 @@ export const constantRoutes = [
     path: '/example',
     component: Layout,
     redirect: '/example/table',
-    name: 'example',
+    name: 'Example',
     meta: { title: '部门管理', icon: 'el-icon-s-help' ,affix:false},
     children: [
       {
         path: 'table',
-        name: 'table',
+        name: 'Table',
         component: () => import('@/views/table/index'),
         meta: { title: '添加部门', icon: 'table',affix:false }
       },
       {
         path: 'tree',
-        name: 'tree',
+        name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: '部门列表', icon: 'tree',affix:false}
       }

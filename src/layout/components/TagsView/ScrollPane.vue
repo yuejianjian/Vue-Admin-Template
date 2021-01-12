@@ -20,7 +20,6 @@ export default {
     }
   },
   mounted() {
-    console.log("zhissss")
     this.scrollWrapper.addEventListener('scroll', this.emitScroll, true)
   },
   beforeDestroy() {

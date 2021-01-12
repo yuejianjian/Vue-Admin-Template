@@ -42,11 +42,9 @@ export default {
   },
   computed: {
     visitedViews() {
-      console.log(this.$store.state.tagsView.visitedViews)
       return this.$store.state.tagsView.visitedViews
     },
     routes() {
-      console.log(this.$store.state.permission.routes)
       return this.$store.state.permission.routes
     }
   },
@@ -72,7 +70,6 @@ export default {
       return route.path === this.$route.path
     },
     isAffix(tag) {
-        console.log(tag.meta && tag.meta.affix);
       return tag.meta && tag.meta.affix
     },
     filterAffixTags(routes, basePath = '/') {
@@ -228,9 +225,9 @@ export default {
         margin-right: 15px;
       }
       &.active {
-        background-color: #42b983;
+        background-color: rgb(24, 144, 255);
         color: #fff;
-        border-color: #42b983;
+        border-color:rgb(24, 144, 255);
         &::before {
           content: '';
           background: #fff;

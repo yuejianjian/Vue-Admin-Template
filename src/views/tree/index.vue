@@ -123,7 +123,6 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          console.log(this.selectedRowKeys);
           this.DeleteListFun();
         }).catch(() => {
 
@@ -137,46 +136,35 @@ export default {
       }
     },
     DeleteListFun(){
-      console.log(this.selectedRowKeys);
       DeleteDepartmentList({id:this.selectedRowKeys.toString()}).then(res =>{
-        console.log(res);
         Message.success(res.message);
         this.getDataList()
         this.selectedRowKeys =[];
       }).catch(err =>{
-        console.log(err);
       })
     },
     //切换状态
     changeStatus(val){
-
-      console.log(val);
       var params={
         id:val.id,
         status:val.status==="1"?false:true
       }
       StatusDepartmentList(params).then(res =>{
-        console.log(res);
         Message.success(res.message);
         this.getDataList()
       }).catch(err =>{
-        console.log(err);
         Message.error(err.message);
       })
     },
     handleCurrentChange(val) {
       this.pageNumber =val;
       this.getDataList();
-
-      console.log(`当前页: ${val}`);
     },
    handleSelectionChange(val) {
-        console.log(val);
         this.selectedRowKeys=[];
         for(var i = 0 ;i<val.length;i++){
           this.selectedRowKeys.push(val[i].id)
         }
-        console.log( this.selectedRowKeys);
         this.multipleSelection = val;
    },
 
@@ -190,7 +178,6 @@ export default {
     }
     this.tableloading =true;
     GetDepartmentList(params).then(res =>{
-      console.log(res);
       this.datalist=res.data.data,
       this.totals=res.data.total,
       this.tableloading=false;
@@ -202,9 +189,7 @@ export default {
           }
         }
       }
-      console.log(arr);
       arr.forEach(row => {
-        console.log(row)
         if(row){
           this.$refs.multipleTable.toggleRowSelection(row,true);
         }else{
@@ -213,7 +198,6 @@ export default {
       }); 
 
     }).catch(err =>{
-      console.log(err);
     })
    }
   },
