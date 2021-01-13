@@ -108,7 +108,7 @@ export const constantRoutes = [
     redirect: '/nested/menu1',
     name: 'Nested',
     meta: {
-      title: '图标',
+      title: '数据可视化',
       icon: 'nested'
     },
     children: [
@@ -166,7 +166,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+        path: 'https://github.com/yuejianjian/Vue-Admin-Template',
         meta: { title: '项目代码地址', icon: 'link' }
       }
     ]

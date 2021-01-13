@@ -83,7 +83,7 @@
 import { GetDepartmentList,StatusDepartmentList,DeleteDepartmentList } from '@/api/user'
 import {  Message } from 'element-ui'
 export default {
-
+  name:'Tree',
   data() {
     return {
       name:'',
@@ -161,11 +161,13 @@ export default {
       this.getDataList();
     },
    handleSelectionChange(val) {
+        console.log(val);
         this.selectedRowKeys=[];
         for(var i = 0 ;i<val.length;i++){
           this.selectedRowKeys.push(val[i].id)
         }
         this.multipleSelection = val;
+        console.log(this.selectedRowKeys);
    },
 
    getDataList(){
@@ -202,6 +204,7 @@ export default {
    }
   },
   mounted(){
+    console.log("执行次数!!!!!!!!!!!!!!!!!")
     this.getDataList()
   }
 }
