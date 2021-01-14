@@ -1,7 +1,14 @@
 import request from '@/utils/request'
+//注册
+export function register(data) {
+  return request({
+    url: '/register/',
+    method: 'post',
+    data
+  })
+}
 //登录
 export function login(data) {
-  console.log(data)
   return request({
     url: '/login/',
     method: 'post',
@@ -10,7 +17,6 @@ export function login(data) {
 }
 //获取验证码
 export function GetSms(data){
-  console.log(data)
   return request({
       url:"/getSms/",
       method:"post",
