@@ -56,26 +56,49 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/department',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
+    redirect: '/department/table',
+    name: 'Department',
     meta: { title: '部门管理', icon: 'el-icon-s-help' ,affix:false},
     children: [
       {
         path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
+        name: 'DepartmentAdd',
+        component: () => import('@/views/department/add/index'),
         meta: { title: '添加部门', icon: 'table',affix:false }
       },
       {
         path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        name: 'DepartmentList',
+        component: () => import('@/views/department/list/index'),
         meta: { title: '部门列表', icon: 'tree',affix:false}
       }
     ]
   },
+
+  {
+    path: '/position',
+    component: Layout,
+    redirect: '/position/list',
+    name: 'Position',
+    meta: { title: '职位管理', icon: 'el-icon-s-help' ,affix:false},
+    children: [
+      {
+        path: 'list',
+        name: 'PositionList',
+        component: () => import('@/views/position/list/index'),
+        meta: { title: '职位列表', icon: 'table',affix:false }
+      },
+      {
+        path: 'add',
+        name: 'PositionAdd',
+        component: () => import('@/views/position/add/index'),
+        meta: { title: '添加职位', icon: 'tree',affix:false}
+      }
+    ]
+  },
+
 
   {
     path: '/form',

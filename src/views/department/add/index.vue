@@ -120,7 +120,7 @@ export default {
           this.loading =false;
           Message.success(res.message);       
           this.$refs[formName].resetFields(); 
-          this.$router.push({ path: '/example/tree'});
+          this.$router.push({ path: '/department/list'});
       }).catch(err =>{   
            this.loading =false;                   
       })
@@ -131,7 +131,7 @@ export default {
       EditDepartDetails(params).then(res =>{
           this.loading =false;
           Message.success(res.message);
-          this.$router.push({ path: '/example/tree'});
+          this.$router.push({ path: '/department/list'});
       }).catch(err =>{
           this.loading =false;  
       })

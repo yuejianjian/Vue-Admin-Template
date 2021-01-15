@@ -3,8 +3,8 @@
     <el-form label-width="80px">
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-form-item label="部门名称:">
-            <el-input v-model="name" placeholder="请输入部门名称"></el-input>
+          <el-form-item label="职位名称:">
+            <el-input v-model="name" placeholder="请输入职位名称"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -28,10 +28,18 @@
         width="55">
       </el-table-column>
       <el-table-column
-        label="部门名称"
+        label="职位名称"
          align="center"
         width="120">
-        <template slot-scope="scope">{{ scope.row.name }}</template>
+        <template slot-scope="scope">{{ scope.row.jobName }}</template>
+      </el-table-column>
+      <el-table-column
+        label="部门名称"
+         align="center"
+        show-overflow-tooltip>
+        <template slot-scope="scope">
+          {{scope.row.name}}
+        </template> 
       </el-table-column>
       <el-table-column
         label="禁启用"
@@ -46,19 +54,11 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="人员数量"
-         align="center"
-        show-overflow-tooltip>
-        <template slot-scope="scope">
-          {{scope.row.number}}
-        </template> 
-      </el-table-column>
-      <el-table-column
         label="操作"
          align="center"
         show-overflow-tooltip>
         <template slot-scope="scope">
-          <el-button type="primary" @click="onEdit(scope.row.id)">编辑</el-button>
+          <el-button type="primary" @click="onEdit(scope.row.jobId)">编辑</el-button>
           <el-button plain @click="DeleteList(scope.row)">删除</el-button>
         </template> 
       </el-table-column>
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { GetDepartmentList,StatusDepartmentList,DeleteDepartmentList } from '@/api/user'
+import { PositionListApi,PositionStatusApi,PositionDeleteApi } from '@/api/user'
 import {  Message } from 'element-ui'
 export default {
   name:'Tree',
@@ -97,7 +97,7 @@ export default {
         currentPage1: 1,
         selectedRowKeys:[],
         loading:false,
-        selectarr:[3535,3536]
+        
     }
   },
   watch: {
@@ -110,15 +110,16 @@ export default {
     },
     //去编辑
     onEdit(id){
-      this.$router.push({ path: '/example/table', query: { id: id }});
+      this.$router.push({ path: '/position/add', query: { id: id }});
     },
     //批量删除
     DeleteList(val){
-      if(val.id){
-        this.selectedRowKeys.push(val.id);
+      console.log(val);
+      if(val.jobId){
+        this.selectedRowKeys.push(val.jobId);
       }
       if(this.selectedRowKeys.length>0){
-        this.$confirm('此操作将永久删除该部门, 是否继续?', '提示', {
+        this.$confirm('此操作将永久删除该职位, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -132,11 +133,12 @@ export default {
           });          
         });
       }else{
-        Message.error('请选择删除的部门!');
+        Message.error('请选择删除的职位!');
       }
     },
     DeleteListFun(){
-      DeleteDepartmentList({id:this.selectedRowKeys.toString()}).then(res =>{
+      console.log(this.selectedRowKeys.toString());
+      PositionDeleteApi({id:this.selectedRowKeys.toString()}).then(res =>{
         Message.success(res.message);
         this.getDataList()
         this.selectedRowKeys =[];
@@ -145,12 +147,15 @@ export default {
     },
     //切换状态
     changeStatus(val){
+      console.log(val);
       var params={
-        id:val.id,
-        status:val.status==="1"?false:true
+        id:val.jobId,
+        status:!val.status
       }
-      StatusDepartmentList(params).then(res =>{
+      this.tableloading =true;
+      PositionStatusApi(params).then(res =>{
         Message.success(res.message);
+        // this.tableloading =false;
         this.getDataList()
       }).catch(err =>{
         Message.error(err.message);
@@ -164,7 +169,7 @@ export default {
         console.log(val);
         this.selectedRowKeys=[];
         for(var i = 0 ;i<val.length;i++){
-          this.selectedRowKeys.push(val[i].id)
+          this.selectedRowKeys.push(val[i].jobId)
         }
         this.multipleSelection = val;
         console.log(this.selectedRowKeys);
@@ -179,25 +184,25 @@ export default {
       params.name = this.keyword
     }
     this.tableloading =true;
-    GetDepartmentList(params).then(res =>{
+    PositionListApi(params).then(res =>{
       this.datalist=res.data.data,
       this.totals=res.data.total,
       this.tableloading=false;
-      var arr = [];
-      for(var i = 0;i<this.datalist.length;i++){
-        for(var j = 0;j<this.selectarr.length;j++){
-          if(this.datalist[i].id==this.selectarr[j]){
-            arr.push(this.datalist[i])
-          }
-        }
-      }
-      arr.forEach(row => {
-        if(row){
-          this.$refs.multipleTable.toggleRowSelection(row,true);
-        }else{
-          this.$refs.multipleTable.clearSelection();
-        }
-      }); 
+      // var arr = [];
+      // for(var i = 0;i<this.datalist.length;i++){
+      //   for(var j = 0;j<this.selectarr.length;j++){
+      //     if(this.datalist[i].id==this.selectarr[j]){
+      //       arr.push(this.datalist[i])
+      //     }
+      //   }
+      // }
+      // arr.forEach(row => {
+      //   if(row){
+      //     this.$refs.multipleTable.toggleRowSelection(row,true);
+      //   }else{
+      //     this.$refs.multipleTable.clearSelection();
+      //   }
+      // }); 
 
     }).catch(err =>{
     })
