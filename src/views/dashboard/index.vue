@@ -1,30 +1,21 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">name:1111 {{ name }}</div>
+  <div class="chart-container">
+    <chart height="100%" width="100%" />
   </div>
 </template>
-
 <script>
-import { mapGetters } from 'vuex'
+import Chart from '@/components/Charts/HomeLine'
 
 export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
+  name: 'HomeLineChart',
+  components: { Chart }
 }
 </script>
 
-<style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
+<style scoped>
+.chart-container{
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 84px);
 }
 </style>

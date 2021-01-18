@@ -49,7 +49,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: 'HomeLineChart',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '控制台', icon: 'dashboard',affix:true }
     }]
@@ -85,17 +85,17 @@ export const constantRoutes = [
     meta: { title: '职位管理', icon: 'el-icon-s-help' ,affix:false},
     children: [
       {
-        path: 'list',
-        name: 'PositionList',
-        component: () => import('@/views/position/list/index'),
-        meta: { title: '职位列表', icon: 'table',affix:false }
-      },
-      {
         path: 'add',
         name: 'PositionAdd',
         component: () => import('@/views/position/add/index'),
         meta: { title: '添加职位', icon: 'tree',affix:false}
-      }
+      },
+      {
+        path: 'list',
+        name: 'PositionList',
+        component: () => import('@/views/position/list/index'),
+        meta: { title: '职位列表', icon: 'table',affix:false }
+      }  
     ]
   },
 
