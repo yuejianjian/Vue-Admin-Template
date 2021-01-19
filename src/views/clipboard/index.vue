@@ -6,12 +6,15 @@
         <el-button type="primary" icon="el-icon-document" @click="handleCopy(inputData,$event)">
           copy
         </el-button>
+        <my-Test />
       </el-tab-pane>
       <el-tab-pane label="use clipboard by v-directive" name="v-directive">
         <el-input v-model="inputData" placeholder="Please input" style="width:400px;max-width:100%;" />
         <el-button v-clipboard:copy="inputData" v-clipboard:success="clipboardSuccess" type="primary" icon="el-icon-document">
           copy
         </el-button>
+        <my-Test />
+        <my-Testtwo />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -20,6 +23,7 @@
 <script>
 import clip from '@/utils/clipboard' // use clipboard directly
 import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive
+import test from "../../components/Test"
 
 export default {
   name: 'ClipboardDemo',
@@ -31,6 +35,9 @@ export default {
       activeName: 'directly',
       inputData: 'https://github.com/PanJiaChen/vue-element-admin'
     }
+  },
+  components:{
+    "my-Testtwo":test
   },
   methods: {
     handleCopy(text, event) {

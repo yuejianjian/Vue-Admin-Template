@@ -60,19 +60,19 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/department/table',
     name: 'Department',
-    meta: { title: '部门管理', icon: 'el-icon-s-help' ,affix:false},
+    meta: { title: '部门管理', icon: 'tree' ,affix:false},
     children: [
       {
         path: 'table',
         name: 'DepartmentAdd',
         component: () => import('@/views/department/add/index'),
-        meta: { title: '添加部门', icon: 'table',affix:false }
+        meta: { title: '添加部门', icon: 'department',affix:false }
       },
       {
         path: 'tree',
         name: 'DepartmentList',
         component: () => import('@/views/department/list/index'),
-        meta: { title: '部门列表', icon: 'tree',affix:false}
+        meta: { title: '部门列表', icon: 'table',affix:false}
       }
     ]
   },
@@ -88,7 +88,7 @@ export const constantRoutes = [
         path: 'add',
         name: 'PositionAdd',
         component: () => import('@/views/position/add/index'),
-        meta: { title: '添加职位', icon: 'tree',affix:false}
+        meta: { title: '添加职位', icon: 'job',affix:false}
       },
       {
         path: 'list',
