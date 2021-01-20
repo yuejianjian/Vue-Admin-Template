@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 import Test from '@/components/Test'
+import dfilters from "@/utils/filter"
 
 import '@/styles/index.scss' // global css
 
@@ -27,6 +28,9 @@ import '@/permission' // permission control
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
+}
+for (let key in dfilters) {
+  Vue.filter(key, dfilters[key]);
 }
 Vue.component('my-Test',Test)
 // set ElementUI lang to EN

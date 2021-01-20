@@ -1,7 +1,7 @@
 <template>
     <div>
         
-        {{message}}
+        {{message|dataFormat}}
     </div>
 </template>
 <script>
@@ -9,6 +9,11 @@
         data(){
             return{
                 message:'1111'
+            }
+        },
+        filters:{
+            dataFormat(msg){
+                return msg +"过滤器"
             }
         }
     }
